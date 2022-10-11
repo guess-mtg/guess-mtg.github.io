@@ -1,24 +1,34 @@
-import logo from './logo.svg';
+import logo from './assets/logo.jpg';
 import './App.css';
+import Keyboard from './components/Keyboard'
+import Panel from './components/Panel'
+import GuessContext from './context'
+import { useState } from 'react';
+
 
 function App() {
+
+  const [ placeholder, updatePlaceholder ] = useState([])
+  const [ currentGuess, updateCurrentGuess ] = useState([])
+  const [ guesses, updateGuesses ] = useState([])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <GuessContext.Provider 
+      value={{ 
+        placeholder: placeholder, 
+        updatePlaceholder: updatePlaceholder,
+        currentGuess: currentGuess, 
+        updateCurrentGuess: updateCurrentGuess,
+        guesses: guesses,
+        updateGuesses: updateGuesses
+      }}
+    >
+      <div className="App">
+        <img src={logo} /> 
+        <Panel />
+        <Keyboard />
+      </div>
+    </GuessContext.Provider>
   );
 }
 
