@@ -3,7 +3,7 @@ import GuessContext from '../context'
 
 const Panel = () => {
 
-    const { placeholder, updatePlaceholder } = useContext(GuessContext)
+    const { placeholder, updatePlaceholder, currentGuess } = useContext(GuessContext)
 
     useEffect( () => {
         fetch('http://localhost:8000/wordle-challenge')
@@ -22,19 +22,31 @@ const Panel = () => {
     }, [])
 
     return (
-        <GuessContext.Consumer>
-            {   ({ currentGuess }) => (
-
-                <div className="guess-container">
-                    { placeholder.map( (space, index) => {
-                        if (!space) return <div className='blank-space'/>
-                        return <div className="letter-space">
-                            { currentGuess.length > (index) ? currentGuess[index] : '' }
+        <>
+            <GuessContext.Consumer>
+                { ({ guesses }) => (
+                    guesses.map( ({ guess, stats }, i) => {
+                        return <div className="guess-container" key={i}>
+                            { guess.split('').map( (char, index) => {
+                                if (char == ' ') return <div className='blank-space'/>
+                                return <div className="letter-space" score={stats[index]}>
+                                    { char }
+                                </div>
+                            })}
                         </div>
-                    })}
+                    })
+                )}
+            </GuessContext.Consumer>
+
+            <div className="guess-container">
+            { placeholder.map( (space, index) => {
+                if (!space) return <div className='blank-space'/>
+                return <div className="letter-space">
+                    { currentGuess.length > (index) ? currentGuess[index] : '' }
                 </div>
-            )}
-        </GuessContext.Consumer>
+            })}
+            </div>
+        </>
     )
 
 }

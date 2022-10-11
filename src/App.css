@@ -60,6 +60,18 @@ h1 {
   padding: 10px;
 }
 
+.letter-space[score="0"] {
+  background-color: yellow;
+}
+
+.letter-space[score="1"] {
+  background-color: green;
+}
+
+.letter-space[score="-1"] {
+  background-color: red;
+}
+
 .blank-space {
   background-color: transparent;
   width: 10px;

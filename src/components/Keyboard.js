@@ -1,15 +1,37 @@
+import { useContext } from 'react'
 import GuessContext from '../context'
 
 const letters = 'abcefghijklmnopqrstuvwxyz'.split('')
 
 const Keyboard = () => {
 
+    const { currentGuess, updateGuesses, guesses, updateCurrentGuess } = useContext(GuessContext)
+
+    const submitGuess = () => {
+        fetch('http://localhost:8000/guess', 
+            { 
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ 'string': currentGuess.join('')})
+            }
+        )
+        .then( (response) => {
+            return response.json()
+        })
+        .then( (result) => {
+            updateGuesses(guesses.concat(result))
+            updateCurrentGuess([], true)
+        })
+    }
+
     return <GuessContext.Consumer>
-        {({ currentGuess, updateCurrentGuess }) => (        
+        {({ updateCurrentGuess }) => (        
             <div className='keyboard'>
                 <button 
                     className='keyboard_key del_key'
-                    onClick={ () => updateCurrentGuess(currentGuess.slice(0,currentGuess.length - 1)) }
+                    onClick={ () => updateCurrentGuess() }
                 >
                     &#8592;
                 </button>
@@ -19,7 +41,7 @@ const Keyboard = () => {
                             <button 
                                 className='keyboard_key' 
                                 key={letter} 
-                                onClick={ () => updateCurrentGuess(currentGuess.concat([letter])) }
+                                onClick={ () => updateCurrentGuess(letter) }
                             >
                                 { letter }
                             </button>
@@ -28,7 +50,7 @@ const Keyboard = () => {
                 }
                 <button 
                     className='keyboard_key enter_key'
-                    onClick={ () => updateCurrentGuess(currentGuess.slice(0,currentGuess.length)) }
+                    onClick={ () => submitGuess() }
                 >
                     &#x2713;
                 </button>
