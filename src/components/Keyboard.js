@@ -1,11 +1,18 @@
 import { useContext } from 'react'
 import GuessContext from '../context'
 
-const letters = 'abcefghijklmnopqrstuvwxyz'.split('')
+const letters = 'abcdefghijklmnopqrstuvwxyz'.split('')
 
 const Keyboard = () => {
 
-    const { currentGuess, updateGuesses, guesses, updateCurrentGuess } = useContext(GuessContext)
+    const { 
+        currentGuess, 
+        updateGuesses, 
+        guesses, 
+        updateCurrentGuess,
+        updateWrongLetters
+    } = useContext(GuessContext)
+
 
     const submitGuess = () => {
         fetch('http://localhost:8000/guess', 
@@ -21,13 +28,18 @@ const Keyboard = () => {
             return response.json()
         })
         .then( (result) => {
+            let wl = []
+            for (const key in result.stats) {
+                if (result.stats[key] < 0) wl.push(result.guess[key])
+            }
+            updateWrongLetters(wl)
             updateGuesses(guesses.concat(result))
             updateCurrentGuess([], true)
         })
     }
 
     return <GuessContext.Consumer>
-        {({ updateCurrentGuess }) => (        
+        {({ updateCurrentGuess, wrongLetters }) => (        
             <div className='keyboard'>
                 <button 
                     className='keyboard_key del_key'
@@ -41,6 +53,7 @@ const Keyboard = () => {
                             <button 
                                 className='keyboard_key' 
                                 key={letter} 
+                                disabled={ wrongLetters.includes(letter) ? true : false }
                                 onClick={ () => updateCurrentGuess(letter) }
                             >
                                 { letter }

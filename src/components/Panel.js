@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect } from "react"
 import GuessContext from '../context'
 
 const Panel = () => {
@@ -16,10 +16,9 @@ const Panel = () => {
                     str += '_ '.repeat(result.info[count])
                     str += ' '
                 }
-                console.log(str)
-                updatePlaceholder(str.split(' '))
+                updatePlaceholder(str.slice(0,str.length-2).split(' '))
             })
-    }, [])
+    }, [ updatePlaceholder ] )
 
     return (
         <>
@@ -28,7 +27,7 @@ const Panel = () => {
                     guesses.map( ({ guess, stats }, i) => {
                         return <div className="guess-container" key={i}>
                             { guess.split('').map( (char, index) => {
-                                if (char == ' ') return <div className='blank-space'/>
+                                if (char === ' ') return <div className='blank-space'/>
                                 return <div className="letter-space" score={stats[index]}>
                                     { char }
                                 </div>

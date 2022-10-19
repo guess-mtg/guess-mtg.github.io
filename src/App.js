@@ -11,20 +11,24 @@ function App() {
   const [ placeholder, updatePlaceholder ] = useState([])
   const [ currentGuess, updateCurrentGuess ] = useState([])
   const [ guesses, updateGuesses ] = useState([])
+  const [ wrongLetters, updateWrongLetters ] = useState([])
+
+  const addWrongLetter = (letters) => {
+    updateWrongLetters(wrongLetters.concat(letters))
+  }
 
   const handleGuessUpdate = (letter, clear = false ) => {
 
-    let newGuess 
+    let newGuess = currentGuess
     
     if (clear) {
       newGuess = []
     }
     else if (letter) {
-      newGuess = currentGuess.concat(letter)
-      console.log(placeholder[currentGuess.length])
-      if (!placeholder[currentGuess.length+1]) {
-        newGuess = newGuess.concat(' ')
+      if (!placeholder[currentGuess.length]) {
+        newGuess = currentGuess.concat(' ')
       }
+      newGuess = newGuess.concat(letter)
     }
     else {
       newGuess = currentGuess.slice(0, currentGuess.length - 1)
@@ -33,10 +37,10 @@ function App() {
       }
     }
 
-    console.log(newGuess)
-
     updateCurrentGuess(newGuess)
   }
+
+  console.log(wrongLetters)
 
   return (
     <GuessContext.Provider 
@@ -46,11 +50,13 @@ function App() {
         currentGuess: currentGuess, 
         updateCurrentGuess: handleGuessUpdate,
         guesses: guesses,
-        updateGuesses: updateGuesses
+        updateGuesses: updateGuesses,
+        wrongLetters: wrongLetters,
+        updateWrongLetters: addWrongLetter
       }}
     >
       <div className="App">
-        <img src={logo} /> 
+        <img src={logo} alt='GuessMTG logo'/> 
         <Panel />
         <Keyboard />
       </div>

@@ -35,6 +35,10 @@ h1 {
   text-align: center;
 }
 
+.keyboard_key:disabled {
+  opacity: 0.5;
+}
+
 .del_key {
   background-color: #f33;
   content: "Confirmar";
