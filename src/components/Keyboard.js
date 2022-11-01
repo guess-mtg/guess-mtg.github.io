@@ -23,7 +23,7 @@ const Keyboard = () => {
     const [ modalIsOpen, toggleModal] = useState(false)
 
     const submitGuess = () => {
-        fetch('http://localhost:8000/guess', 
+        fetch('http://guess-mtg-svc.herokuapp.com/guess', 
             { 
                 method: 'POST', 
                 headers: {

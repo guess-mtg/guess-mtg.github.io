@@ -1,12 +1,12 @@
-import logo from './assets/logo.jpg';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Keyboard from './components/Keyboard'
-import Panel from './components/Panel'
-import GuessContext from './context'
+import Keyboard from '../src/components/Keyboard'
+import Panel from '../src/components/Panel'
+import GuessContext from '../src/context'
 import { useState } from 'react';
 import { IoInformationCircleOutline, IoMenu } from 'react-icons/io5';
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
+import Image from 'next/image'
 
 function App() {
 
@@ -62,7 +62,7 @@ function App() {
       <div className="App">
         <div className="header w-100 d-flex justify-content-between align-items-center border-bottom mb-3">
           <IoMenu color="#eee" size={40}/>
-          <img src={logo} alt='GuessMTG logo' height={80}/> 
+          <Image src='/assets/logo.jpg' alt='GuessMTG logo' height={80} width={100}/> 
           <Button onClick={ () => toggleInfo(!isInfoOpen) } variant='link'>
             <IoInformationCircleOutline color="#eee" size={40} />
           </Button>
