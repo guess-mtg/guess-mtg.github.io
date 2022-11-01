@@ -6,7 +6,7 @@ const Panel = () => {
     const { placeholder, updatePlaceholder, currentGuess } = useContext(GuessContext)
 
     useEffect( () => {
-        fetch('http://guess-mtg-svc.herokuapp.com/wordle-challenge')
+        fetch('https://guess-mtg-svc.herokuapp.com/wordle-challenge')
             .then( (response) => {
                 return response.json()
             })
