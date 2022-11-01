@@ -44,6 +44,12 @@ function App() {
     updateCurrentGuess(newGuess)
   }
 
+  let height = 0
+
+  if (typeof document !== 'undefined') {
+    height = document.documentElement.clientHeight
+  }
+
   return (
     <GuessContext.Provider 
       value={{ 
@@ -59,7 +65,7 @@ function App() {
         updateResult: updateResult
       }}
     >
-      <div className="App">
+      <div className="App" style={{ 'height': height}}>
         <div className="header w-100 d-flex justify-content-between align-items-center border-bottom mb-3">
           <IoMenu color="#eee" size={40}/>
           <Image src='/assets/logo.jpg' alt='GuessMTG logo' height={80} width={100}/> 
@@ -128,6 +134,7 @@ function App() {
             </p>
           </Modal.Body>
         </Modal>
+
       </div>
     </GuessContext.Provider>
   );
