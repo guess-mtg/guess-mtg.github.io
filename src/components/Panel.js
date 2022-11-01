@@ -29,7 +29,7 @@ const Panel = () => {
                             { guess.split('').map( (char, index) => {
                                 if (char === ' ') return <div className='blank-space'/>
                                 return <div className="letter-space" score={stats[index]}>
-                                    { index == 0 || !placeholder[index - 1] ? <span className='word-start' >&#x2022;</span> : null}
+                                    { index === 0 || !placeholder[index - 1] ? <span className='word-start' >&#x2022;</span> : null}
                                     { char }
                                 </div>
                             })}
@@ -42,7 +42,7 @@ const Panel = () => {
             { placeholder.map( (space, index) => {
                 if (!space) return <div className='blank-space' key={index}/>
                 return <div className="letter-space" key={index}>
-                    { index == 0 || !placeholder[index - 1] ? <span className='word-start' >&#x2022;</span> : null}
+                    { index === 0 || !placeholder[index - 1] ? <span className='word-start' >&#x2022;</span> : null}
                     { currentGuess.length > (index) ? currentGuess[index] : '' }
                 </div>
             })}

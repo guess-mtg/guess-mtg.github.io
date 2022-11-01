@@ -82,10 +82,10 @@ function App() {
             <div className='d-flex'>
               {
                 'TWO WORDS'.split('').map( (letter, index) => {
-                  if (index == 0) {
+                  if (index === 0) {
                     return <div className='letter-space' score='1'>{letter}</div>
                   }
-                  if (letter == " ") {
+                  if (letter === " ") {
                     return <div className='blank-space'>{letter}</div>
                   }
                   return <div className='letter-space'>{letter}</div>
@@ -98,10 +98,10 @@ function App() {
             <div className='d-flex'>
               {
                 'OTHER WORDS'.split('').map( (letter, index) => {
-                  if (index == 9) {
+                  if (index === 9) {
                     return <div className='letter-space' score='0'>{letter}</div>
                   }
-                  if (letter == " ") {
+                  if (letter === " ") {
                     return <div className='blank-space'>{letter}</div>
                   }
                   return <div className='letter-space'>{letter}</div>
@@ -114,10 +114,10 @@ function App() {
             <div className='d-flex'>
               {
                 'LAST TWO'.split('').map( (letter, index) => {
-                  if (index == 2) {
+                  if (index === 2) {
                     return <div className='letter-space' score='-1'>{letter}</div>
                   }
-                  if (letter == " ") {
+                  if (letter === " ") {
                     return <div className='blank-space'>{letter}</div>
                   }
                   return <div className='letter-space'>{letter}</div>
