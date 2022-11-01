@@ -44,10 +44,10 @@ function App() {
     updateCurrentGuess(newGuess)
   }
 
-  let height = 0
+  let height = '100vh'
 
   if (typeof document !== 'undefined') {
-    height = document.documentElement.clientHeight
+    height = window.innerHeight
   }
 
   return (
