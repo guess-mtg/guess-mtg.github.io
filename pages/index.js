@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Keyboard from '../src/components/Keyboard'
 import Panel from '../src/components/Panel'
 import GuessContext from '../src/context'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IoInformationCircleOutline, IoMenu } from 'react-icons/io5';
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
@@ -16,6 +16,15 @@ function App() {
   const [ wrongLetters, updateWrongLetters ] = useState([])
   const [ card, updateResult ] = useState({})
   const [ isInfoOpen, toggleInfo ] = useState(false)
+  const [ height, updateHeight ] = useState('100%')
+
+
+  useEffect( () => {
+    console.log(window)
+    if (typeof window != 'undefined') {
+      updateHeight(window.innerHeight)
+    }
+  })
 
   const addWrongLetter = (letters) => {
     updateWrongLetters(wrongLetters.concat(letters))
@@ -42,12 +51,6 @@ function App() {
     }
 
     updateCurrentGuess(newGuess)
-  }
-
-  let height = '100vh'
-
-  if (typeof document !== 'undefined') {
-    height = window.innerHeight
   }
 
   return (
