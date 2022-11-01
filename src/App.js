@@ -83,12 +83,12 @@ function App() {
               {
                 'TWO WORDS'.split('').map( (letter, index) => {
                   if (index === 0) {
-                    return <div className='letter-space' score='1'>{letter}</div>
+                    return <div key={index} className='letter-space' score='1'>{letter}</div>
                   }
                   if (letter === " ") {
-                    return <div className='blank-space'>{letter}</div>
+                    return <div  key={index} className='blank-space'>{letter}</div>
                   }
-                  return <div className='letter-space'>{letter}</div>
+                  return <div  key={index} className='letter-space'>{letter}</div>
                 })
               }
             </div>
@@ -99,12 +99,12 @@ function App() {
               {
                 'OTHER WORDS'.split('').map( (letter, index) => {
                   if (index === 9) {
-                    return <div className='letter-space' score='0'>{letter}</div>
+                    return <div key={index} className='letter-space' score='0'>{letter}</div>
                   }
                   if (letter === " ") {
-                    return <div className='blank-space'>{letter}</div>
+                    return <div key={index} className='blank-space'>{letter}</div>
                   }
-                  return <div className='letter-space'>{letter}</div>
+                  return <div key={index} className='letter-space'>{letter}</div>
                 })
               }
             </div>
@@ -115,12 +115,12 @@ function App() {
               {
                 'LAST TWO'.split('').map( (letter, index) => {
                   if (index === 2) {
-                    return <div className='letter-space' score='-1'>{letter}</div>
+                    return <div key={index} className='letter-space' score='-1'>{letter}</div>
                   }
                   if (letter === " ") {
-                    return <div className='blank-space'>{letter}</div>
+                    return <div key={index} className='blank-space'>{letter}</div>
                   }
-                  return <div className='letter-space'>{letter}</div>
+                  return <div key={index} className='letter-space'>{letter}</div>
                 })
               }
             </div>

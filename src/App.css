@@ -103,9 +103,10 @@ h1 {
 
 .blank-space {
   background-color: transparent;
-  width: 10px;
+  height: 0;
+  margin-right: 100%;
+  /* width: 10px; */
 }
-
 
 
 @media screen and (min-width: 720px) {
@@ -125,5 +126,9 @@ h1 {
     width: 60px;
     font-size: 20px;
     border-width: 2px;
+  }
+
+  .blank-space {
+    margin-right: 2px;
   }
 }

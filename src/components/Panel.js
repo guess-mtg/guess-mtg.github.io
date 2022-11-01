@@ -6,7 +6,7 @@ const Panel = () => {
     const { placeholder, updatePlaceholder, currentGuess } = useContext(GuessContext)
 
     useEffect( () => {
-        fetch('http://localhost:8000/wordle-challenge')
+        fetch('http://localhost:3002/wordle-challenge')
             .then( (response) => {
                 return response.json()
             })
@@ -21,7 +21,7 @@ const Panel = () => {
     }, [ updatePlaceholder ] )
 
     return (
-        <div class="panel">
+        <div className="panel">
             <GuessContext.Consumer>
                 { ({ guesses }) => (
                     guesses.map( ({ guess, stats }, i) => {
