@@ -164,3 +164,16 @@ h1 {
   margin: auto;
   margin-bottom: 20px;
 }
+
+.header-link {
+  color: #eee;
+  font-size: 12px;
+  text-decoration: none;
+  display: flex;
+  align-items: flex-end;
+}
+
+.header-link:hover {
+  opacity: 0.5;
+  color: #eee;
+}

@@ -3,7 +3,7 @@ import Keyboard from '../src/components/Keyboard'
 import Panel from '../src/components/Panel'
 import GuessContext from '../src/context'
 import { useEffect, useState } from 'react';
-import { IoInformationCircleOutline, IoMenu } from 'react-icons/io5';
+import { IoInformationCircleOutline, IoLogoInstagram, IoMenu } from 'react-icons/io5';
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Image from 'next/image'
@@ -81,11 +81,13 @@ function App() {
           <meta property="og:type" content="website" />
         </Head>
         <div className="header w-100 d-flex justify-content-between align-items-center border-bottom mb-3">
-          <IoMenu color="#eee" size={40}/>
-          <Image src='/assets/logo.jpg' alt='GuessMTG logo' height={80} width={100}/> 
           <Button onClick={ () => toggleInfo(!isInfoOpen) } variant='link'>
             <IoInformationCircleOutline color="#eee" size={40} />
           </Button>
+          <Image src='/assets/logo.jpg' alt='GuessMTG logo' height={80} width={100}/> 
+          <a className="header-link" href="https://instagram.com/guessmtg" target="_blank" rel='noopener'>
+            <IoLogoInstagram color="#eee" size={20}/> &nbsp;Follow @GuessMTG
+          </a>
         </div>
         <Panel />
         <Keyboard />
