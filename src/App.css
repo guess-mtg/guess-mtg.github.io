@@ -158,3 +158,9 @@ h1 {
   }
 
 }
+
+.card {
+  width: 320px;
+  margin: auto;
+  margin-bottom: 20px;
+}

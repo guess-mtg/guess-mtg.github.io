@@ -113,7 +113,7 @@ const Keyboard = () => {
                     <Modal.Header closeButton>
                     <Modal.Title>Well done!</Modal.Title>
                     </Modal.Header>
-                    <Image src={card?.image_links?.large} />
+                    <Image src={card?.image_links?.large} width={320} className="card"/>
                 </Modal>
             </div>
         )}
