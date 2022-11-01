@@ -8,7 +8,9 @@ const defaultContext = {
     guesses: [],
     updateGuesses: () => {},
     wrongLetters: [],
-    updateWrongLetters: () => {}
+    updateWrongLetters: () => {},
+    result: {},
+    updateResult: () => {}
   }
   
 export default React.createContext(defaultContext)
