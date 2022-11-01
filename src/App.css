@@ -108,6 +108,10 @@ h1 {
   /* width: 10px; */
 }
 
+.blank-space.info {
+  margin-right: 0px;
+  width: 10px;
+}
 
 @media screen and (min-width: 720px) {
   .keyboard {
@@ -131,4 +135,5 @@ h1 {
   .blank-space {
     margin-right: 2px;
   }
+
 }

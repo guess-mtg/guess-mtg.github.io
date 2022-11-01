@@ -85,7 +85,7 @@ function App() {
                     return <div key={index} className='letter-space' score='1'>{letter}</div>
                   }
                   if (letter === " ") {
-                    return <div  key={index} className='blank-space'>{letter}</div>
+                    return <div  key={index} className='blank-space info'>{letter}</div>
                   }
                   return <div  key={index} className='letter-space'>{letter}</div>
                 })
@@ -101,7 +101,7 @@ function App() {
                     return <div key={index} className='letter-space' score='0'>{letter}</div>
                   }
                   if (letter === " ") {
-                    return <div key={index} className='blank-space'>{letter}</div>
+                    return <div key={index} className='blank-space info'>{letter}</div>
                   }
                   return <div key={index} className='letter-space'>{letter}</div>
                 })
@@ -117,7 +117,7 @@ function App() {
                     return <div key={index} className='letter-space' score='-1'>{letter}</div>
                   }
                   if (letter === " ") {
-                    return <div key={index} className='blank-space'>{letter}</div>
+                    return <div key={index} className='blank-space info'>{letter}</div>
                   }
                   return <div key={index} className='letter-space'>{letter}</div>
                 })
