@@ -164,15 +164,41 @@ h1 {
   margin-bottom: 20px;
 }
 
-.header-link {
-  color: #eee;
-  font-size: 12px;
-  text-decoration: none;
-  display: flex;
+.menu-link {
+  color: #333;
   align-items: flex-end;
+  font-weight: bold;
 }
 
-.header-link:hover {
+.menu-link:hover {
   opacity: 0.5;
   color: #eee;
+}
+
+.sidebar {
+  margin: 0;
+  position: absolute;
+  width: 100%;
+  background-color: #eee;
+  color: #333;
+  right: -100%;
+  top: 80px;
+  height: calc(100% - 125px);
+  transition: all 0.5s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.sidebar.show {
+  transform: translateX(-100%);
+  transition: all 0.5s;
+}
+
+footer {
+  color: #eee;
+  font-size: 10px;
+  text-align: center  ;
 }

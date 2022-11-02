@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import GuessContext from '../context'
 import { IoBackspaceOutline, IoSend } from 'react-icons/io5'
 import Button from 'react-bootstrap/Button';
@@ -8,6 +8,8 @@ import Image from 'react-bootstrap/Image'
 const letters_1 = 'QWERTYUIOP'.split('')
 const letters_2 = 'ASDFGHJKL'.split('')
 const letters_3 = 'ZXCVBNM'.split('')
+
+const all_letter = letters_1.concat(letters_2).concat(letters_3)
 
 const Keyboard = () => {
 
@@ -22,6 +24,26 @@ const Keyboard = () => {
     } = useContext(GuessContext)
 
     const [ modalIsOpen, toggleModal] = useState(false)
+
+    useEffect( () => {
+        const handleKeyPress = (e) => {
+            const letter = e.key.toUpperCase()
+            if (all_letter.includes(letter)) {
+                updateCurrentGuess(letter)
+            }
+            else if (letter == 'ENTER') {
+                submitGuess()
+            }
+            else if (letter == 'BACKSPACE') {
+                updateCurrentGuess()
+            }
+        }
+
+        if (typeof window != 'undefined') {
+            window.addEventListener('keydown', handleKeyPress)
+        }
+        return () => window.removeEventListener('keydown', handleKeyPress)
+    })
 
     const submitGuess = () => {
         fetch('https://guess-mtg-svc.herokuapp.com/guess', 
@@ -66,7 +88,7 @@ const Keyboard = () => {
             </Button>
         )
     }
-
+    
     return <GuessContext.Consumer>
         {({ updateCurrentGuess, wrongLetters, card }) => (        
             <div className='keyboard'>

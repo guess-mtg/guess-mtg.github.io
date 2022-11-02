@@ -3,7 +3,7 @@ import Keyboard from '../src/components/Keyboard'
 import Panel from '../src/components/Panel'
 import GuessContext from '../src/context'
 import { useEffect, useState } from 'react';
-import { IoInformationCircleOutline, IoLogoInstagram, IoMenu } from 'react-icons/io5';
+import { IoAdd, IoInformationCircleOutline, IoCloseOutline } from 'react-icons/io5';
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Image from 'next/image'
@@ -18,6 +18,7 @@ function App() {
   const [ wrongLetters, updateWrongLetters ] = useState([])
   const [ card, updateResult ] = useState({})
   const [ isInfoOpen, toggleInfo ] = useState(false)
+  const [ isMenuOpen, toggleMenu ] = useState(false)
   const [ height, updateHeight ] = useState('100%')
 
 
@@ -33,20 +34,24 @@ function App() {
     updateWrongLetters(wrongLetters.concat(letters))
   }
 
-  const handleGuessUpdate = (letter, clear = false ) => {
+  const handleGuessUpdate = (letter, clear = false) => {
 
     let newGuess = currentGuess
     
+    console.log(currentGuess.length)
+    console.log(placeholder.length)
     if (clear) {
       newGuess = []
     }
     else if (letter) {
       // Don't add letter to guess if it already has the same length as the placeholder
-      if (currentGuess.length == placeholder.length) {
-        return null 
-      }
-      else if (!placeholder[currentGuess.length]) {
-        newGuess = currentGuess.concat(' ')
+      if (placeholder.length > 0) {
+        if (currentGuess.length == placeholder.length) {
+          return null 
+        }
+        else if (!placeholder[currentGuess.length]) {
+          newGuess = currentGuess.concat(' ')
+        }
       }
       newGuess = newGuess.concat(letter)
     }
@@ -56,6 +61,8 @@ function App() {
         newGuess = newGuess.slice(0, newGuess.length - 1)
       }
     }
+
+    console.log(newGuess)
 
     updateCurrentGuess(newGuess)
   }
@@ -90,13 +97,20 @@ function App() {
             <IoInformationCircleOutline color="#eee" size={40} />
           </Button>
           <Image src='/assets/logo.jpg' alt='GuessMTG logo' height={80} width={100}/> 
-          <a className="header-link" href="https://instagram.com/guessmtg" target="_blank" rel='noopener'>
-            <IoLogoInstagram color="#eee" size={20}/> &nbsp;Follow @GuessMTG
-          </a>
+
+          <Button onClick={ () => toggleMenu(!isMenuOpen)} variant="link">
+            { isMenuOpen ? 
+              <IoCloseOutline color="#eee" size={40} /> :
+              <IoAdd color="#eee" size={40} /> 
+            }
+          </Button>
+
         </div>
         <Panel />
         <Keyboard />
-        
+        <footer>
+          <span>Unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. ©Wizards of the Coast LLC.</span>
+        </footer>
         <Modal show={isInfoOpen} onHide={() => toggleInfo(false)} size='lg'>
           <Modal.Header closeButton>
           <Modal.Title>GuessMTG - Guess the card!</Modal.Title>
@@ -155,6 +169,14 @@ function App() {
             </p>
           </Modal.Body>
         </Modal>
+        <menu className={ isMenuOpen ? 'sidebar show' : 'sidebar' }>
+          <p>
+            Looking for parterships? Contact us <strong>contact@guessmtg.com</strong>
+          </p>
+          <p>
+            Want more games and challenges? <br/> Follow @<a className="menu-link" href="https://instagram.com/guessmtg" target="_blank" rel='noopener'>GuessMTG</a>    on Instagram.
+          </p>
+        </menu>
 
       </article>
     </GuessContext.Provider>
