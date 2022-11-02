@@ -22,11 +22,12 @@ function App() {
 
 
   useEffect( () => {
-    console.log(window)
     if (typeof window != 'undefined') {
       updateHeight(window.innerHeight)
     }
-  })
+
+    toggleInfo(true)
+  }, [ ])
 
   const addWrongLetter = (letters) => {
     updateWrongLetters(wrongLetters.concat(letters))
@@ -40,7 +41,11 @@ function App() {
       newGuess = []
     }
     else if (letter) {
-      if (!placeholder[currentGuess.length]) {
+      // Don't add letter to guess if it already has the same length as the placeholder
+      if (currentGuess.length == placeholder.length) {
+        return null 
+      }
+      else if (!placeholder[currentGuess.length]) {
         newGuess = currentGuess.concat(' ')
       }
       newGuess = newGuess.concat(letter)
@@ -70,7 +75,7 @@ function App() {
         updateResult: updateResult
       }}
     >
-      <div className="App" style={{ 'height': height}}>
+      <article className="App" style={{ 'height': height}}>
         <Head>
           <title>GuessMTG</title>
           <meta name="description" content="Guess the name of the 'Magic, The Gathering' card of the day!" />
@@ -100,7 +105,7 @@ function App() {
             <p>For each card you'll have 10 guesses</p>
             <p> The color of the tiles will change to show how close your guess was to the word.</p>
             <p>Examples:</p>
-            <div className='d-flex'>
+            <section className='d-flex'>
               {
                 'TWO WORDS'.split('').map( (letter, index) => {
                   if (index === 0) {
@@ -112,11 +117,11 @@ function App() {
                   return <div  key={index} className='letter-space'>{letter}</div>
                 })
               }
-            </div>
+            </section>
             <p>
               The letter <strong>T</strong> is in the word and in the correct spot.
             </p>
-            <div className='d-flex'>
+            <section className='d-flex'>
               {
                 'OTHER WORDS'.split('').map( (letter, index) => {
                   if (index === 9) {
@@ -128,11 +133,11 @@ function App() {
                   return <div key={index} className='letter-space'>{letter}</div>
                 })
               }
-            </div>
+            </section>
             <p>
               The letter <strong>D</strong> is in the words, but in the correct spot.
             </p>
-            <div className='d-flex'>
+            <section className='d-flex'>
               {
                 'LAST TWO'.split('').map( (letter, index) => {
                   if (index === 2) {
@@ -144,14 +149,14 @@ function App() {
                   return <div key={index} className='letter-space'>{letter}</div>
                 })
               }
-            </div>
+            </section>
             <p>
               The letter <strong>S</strong> is not in the words.
             </p>
           </Modal.Body>
         </Modal>
 
-      </div>
+      </article>
     </GuessContext.Provider>
   );
 }

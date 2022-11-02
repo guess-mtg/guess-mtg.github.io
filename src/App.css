@@ -37,19 +37,18 @@ h1 {
 }
 
 .panel {
-  height: calc(100vh - 200px);
+  height: calc(100vh - 270px);
   overflow-y: auto;
 }
 
 .keyboard {
-  position: absolute;
   bottom: 0px;
   height: 170px;
   width: 100%;
 }
 
 .keyboard_key {
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   padding: 10px;
   background-color: #eee;
   width: 35px;

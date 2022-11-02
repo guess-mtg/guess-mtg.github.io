@@ -13,6 +13,7 @@ const Keyboard = () => {
 
     const { 
         currentGuess, 
+        placeholder,
         updateGuesses, 
         guesses, 
         updateCurrentGuess,
@@ -49,15 +50,17 @@ const Keyboard = () => {
         })
     }
 
-    const renderKey = (letter, disabled = false) => {
+    const renderKey = (letter, wrongLetters) => {
+
+        const disabled = wrongLetters.includes(letter)
 
         return (
             <Button 
                 variant='light'
                 className='keyboard_key' 
                 key={letter} 
-                disabled={ disabled }
-                onClick={ () => updateCurrentGuess(letter) }
+                disabled={disabled}
+                onClick={ () => disabled || currentGuess.length == placeholder.lenght ? null : updateCurrentGuess(letter) }
             >
                 { letter }
             </Button>
@@ -71,7 +74,7 @@ const Keyboard = () => {
                 {
                     letters_1.map( (letter, index) => {
                         return (
-                            renderKey(letter, wrongLetters.includes(letter))
+                            renderKey(letter, wrongLetters)
                         )
                     })
                 }
@@ -80,7 +83,7 @@ const Keyboard = () => {
                 {
                     letters_2.map( (letter, index) => {
                         return (
-                            renderKey(letter, wrongLetters.includes(letter))
+                            renderKey(letter, wrongLetters)
                         )
                     })
                 }
@@ -96,7 +99,7 @@ const Keyboard = () => {
                     {
                         letters_3.map( (letter, index) => {
                             return (
-                                renderKey(letter, wrongLetters.includes(letter))
+                                renderKey(letter, wrongLetters)
                             )
                         })
                     }                       
