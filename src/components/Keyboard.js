@@ -41,6 +41,9 @@ const Keyboard = () => {
 
         if (typeof window != 'undefined') {
             window.addEventListener('keydown', handleKeyPress)
+            if (localStorage.getItem('GuessMTG@guesses')) {
+                updateGuesses(JSON.parse(localStorage.getItem('GuessMTG@guesses')))
+            }
         }
         return () => window.removeEventListener('keydown', handleKeyPress)
     })
@@ -68,6 +71,7 @@ const Keyboard = () => {
             }
             updateWrongLetters(wl)
             updateGuesses(guesses.concat(result))
+            localStorage.setItem('GuessMTG@guesses', JSON.stringify(guesses.concat(result)))
             updateCurrentGuess([], true)
         })
     }

@@ -62,7 +62,7 @@ h1 {
 }
 
 .keyboard_key:disabled {
-  opacity: 0.1;
+  background-color: rgb(254, 165, 165) !important;
 }
 
 .enter_key,

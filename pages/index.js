@@ -21,7 +21,6 @@ function App() {
   const [ isMenuOpen, toggleMenu ] = useState(false)
   const [ height, updateHeight ] = useState('100%')
 
-
   useEffect( () => {
     if (typeof window != 'undefined') {
       updateHeight(window.innerHeight)
@@ -38,8 +37,6 @@ function App() {
 
     let newGuess = currentGuess
     
-    console.log(currentGuess.length)
-    console.log(placeholder.length)
     if (clear) {
       newGuess = []
     }
@@ -61,8 +58,6 @@ function App() {
         newGuess = newGuess.slice(0, newGuess.length - 1)
       }
     }
-
-    console.log(newGuess)
 
     updateCurrentGuess(newGuess)
   }
