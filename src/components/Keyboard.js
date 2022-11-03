@@ -46,7 +46,7 @@ const Keyboard = () => {
             }
         }
         return () => window.removeEventListener('keydown', handleKeyPress)
-    })
+    }, [ currentGuess ] )
 
     const submitGuess = () => {
         fetch('https://guess-mtg-svc.herokuapp.com/guess', 
@@ -94,58 +94,68 @@ const Keyboard = () => {
     }
     
     return <GuessContext.Consumer>
-        {({ updateCurrentGuess, wrongLetters, card }) => (        
-            <div className='keyboard'>
-                <div className="d-flex justify-content-center">
-                {
-                    letters_1.map( (letter, index) => {
-                        return (
-                            renderKey(letter, wrongLetters)
-                        )
-                    })
-                }
-                </div>
-                <div className="d-flex justify-content-center">
-                {
-                    letters_2.map( (letter, index) => {
-                        return (
-                            renderKey(letter, wrongLetters)
-                        )
-                    })
-                }
-                </div>
-                <div className="d-flex justify-content-center">
-                    <Button 
-                        className='keyboard_key del_key'
-                        variant='light'
-                        onClick={ () => updateCurrentGuess() }
-                    >
-                        <IoBackspaceOutline size={30}/>
-                    </Button>
-                    {
-                        letters_3.map( (letter, index) => {
-                            return (
-                                renderKey(letter, wrongLetters)
-                            )
-                        })
-                    }                       
-                    <Button 
-                        className='keyboard_key enter_key'
-                        variant='light'
-                        onClick={ () => submitGuess() }
-                    >
-                        <IoSend size={20}/>
-                    </Button>
-                </div>
-                
-                <Modal show={modalIsOpen} onHide={() => toggleModal(false)}>
-                    <Modal.Header closeButton>
-                    <Modal.Title>Well done!</Modal.Title>
-                    </Modal.Header>
-                    <Image src={card?.image_links?.large} width={320} className="card"/>
-                </Modal>
-            </div>
-        )}
+        {({ updateCurrentGuess, wrongLetters, card, guesses }) => {
+                if (guesses.length == 10) {
+                    return (
+                        <div className='keyboard d-flex align-items-center justify-content-center'>
+                            <p> You haved used all your 10 chances.<br/>Come back tomorrow for more! </p>
+                        </div>
+                    )
+                } else {
+                    return (
+                        <div className='keyboard'>
+                            <div className="d-flex justify-content-center">
+                            {
+                                letters_1.map( (letter, index) => {
+                                    return (
+                                        renderKey(letter, wrongLetters)
+                                    )
+                                })
+                            }
+                            </div>
+                            <div className="d-flex justify-content-center">
+                            {
+                                letters_2.map( (letter, index) => {
+                                    return (
+                                        renderKey(letter, wrongLetters)
+                                    )
+                                })
+                            }
+                            </div>
+                            <div className="d-flex justify-content-center">
+                                <Button 
+                                    className='keyboard_key del_key'
+                                    variant='light'
+                                    onClick={ () => updateCurrentGuess() }
+                                >
+                                    <IoBackspaceOutline size={30}/>
+                                </Button>
+                                {
+                                    letters_3.map( (letter, index) => {
+                                        return (
+                                            renderKey(letter, wrongLetters)
+                                        )
+                                    })
+                                }                       
+                                <Button 
+                                    className='keyboard_key enter_key'
+                                    variant='light'
+                                    onClick={ () => submitGuess() }
+                                >
+                                    <IoSend size={20}/>
+                                </Button>
+                            </div>
+                            
+                            <Modal show={modalIsOpen} onHide={() => toggleModal(false)}>
+                                <Modal.Header closeButton>
+                                <Modal.Title>Well done!</Modal.Title>
+                                </Modal.Header>
+                                <Image src={card?.image_links?.large} width={320} className="card"/>
+                            </Modal>
+                        </div>
+                    )
+                }            
+        }}
     </GuessContext.Consumer>
 }
 
