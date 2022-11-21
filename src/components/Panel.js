@@ -13,7 +13,7 @@ const Panel = () => {
 
     useEffect( () => {
         scrollToBottom()
-        fetch('http://localhost:3002/wordle-challenge')
+        fetch('https://localhost:3002/wordle-challenge')
             .then( (response) => {
                 return response.json()
             })
