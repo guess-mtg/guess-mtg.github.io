@@ -28,14 +28,12 @@ const Panel = () => {
                         if (guessed.indexOf(result['_id']) != -1) {
                             continue
                         }
-                    } 
-                        
+                    }                        
                     let str = ''
                     for (const count in result.info) {
                         str += '_ '.repeat(result.info[count])
                         str += ' '
-                    }
-    
+                    }    
                     if (typeof window != 'undefined') {
                         if (localStorage.getItem('GuessMTG@date') != result.date) {
                             localStorage.removeItem('GuessMTG@guesses')
