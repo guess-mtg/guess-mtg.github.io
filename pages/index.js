@@ -144,7 +144,7 @@ function App() {
               }
             </section>
             <p>
-              The letter <strong>D</strong> is in the words, but in the correct spot.
+              The letter <strong>D</strong> is in the words, but in the incorrect spot.
             </p>
             <section className='d-flex'>
               {
