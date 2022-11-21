@@ -165,8 +165,12 @@ h1 {
 
 .card {
   width: 320px;
-  margin: auto;
-  margin-bottom: 20px;
+  margin: 0;
+
+}
+
+.result-modal .modal-dialog {
+  max-width: 320px !important;
 }
 
 .menu-link {
@@ -177,7 +181,7 @@ h1 {
 
 .menu-link:hover {
   opacity: 0.5;
-  color: #eee;
+  color: #333;
 }
 
 .sidebar {

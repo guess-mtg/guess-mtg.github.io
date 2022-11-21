@@ -32,7 +32,7 @@ const Keyboard = () => {
                 updateCurrentGuess(letter)
             }
             else if (letter == 'ENTER') {
-                submitGuess()
+                if (currentGuess.length > 0) submitGuess()
             }
             else if (letter == 'BACKSPACE') {
                 updateCurrentGuess()
@@ -49,7 +49,9 @@ const Keyboard = () => {
     }, [ currentGuess ] )
 
     const submitGuess = () => {
-        fetch('https://guess-mtg-svc.herokuapp.com/guess', 
+        const challenge_id = localStorage.getItem('GuessMTG@challengeId') 
+
+        fetch(`http://guess-mtg-svc.herokuapp.com/guess/${challenge_id}`, 
             { 
                 method: 'POST', 
                 headers: {
@@ -62,16 +64,22 @@ const Keyboard = () => {
             return response.json()
         })
         .then( (result) => {
-            console.log(result)
-            if (result.success) toggleModal(true, updateResult(result.card))
-
-            let wl = []
-            for (const key in result.stats) {
-                if (result.stats[key] < 0) wl.push(result.guess[key])
+            if (result.success) {
+                const guessed = localStorage.getItem('GuessMTG@guessed') ? JSON.parse(localStorage.getItem('GuessMTG@guessed')) : []
+                guessed.push(result['_id'])
+                localStorage.setItem('GuessMTG@guessed', JSON.stringify(guessed))
+                localStorage.removeItem('GuessMTG@guesses')
+                updateGuesses([])
+                toggleModal(true, updateResult(result.card))
+            } else {
+                let wl = []
+                for (const key in result.stats) {
+                    if (result.stats[key] < 0) wl.push(result.guess[key])
+                }
+                updateWrongLetters(wl)
+                updateGuesses(guesses.concat(result))
+                localStorage.setItem('GuessMTG@guesses', JSON.stringify(guesses.concat(result)))
             }
-            updateWrongLetters(wl)
-            updateGuesses(guesses.concat(result))
-            localStorage.setItem('GuessMTG@guesses', JSON.stringify(guesses.concat(result)))
             updateCurrentGuess([], true)
         })
     }
@@ -146,7 +154,7 @@ const Keyboard = () => {
                                 </Button>
                             </div>
                             
-                            <Modal show={modalIsOpen} onHide={() => toggleModal(false)}>
+                            <Modal show={modalIsOpen} onHide={() => toggleModal(false)} className='result-modal'>
                                 <Modal.Header closeButton>
                                 <Modal.Title>Well done!</Modal.Title>
                                 </Modal.Header>
