@@ -31,10 +31,10 @@ const Panel = () => {
                     }                        
                     let _string = ''
 
-                    for (const count in result.info) {
-                        _string += '_ '.repeat(result.info[count])
+                    Object.values(result.info).forEach( (count) => {
+                        _string += '_ '.repeat(count)
                         _string += ' '
-                    }    
+                    })
 
                     if (typeof window != 'undefined') {
                         if (localStorage.getItem('GuessMTG@date') != result.date) {
