@@ -28,13 +28,16 @@ const Panel = () => {
                         if (guessed.indexOf(result['_id']) != -1) {
                             continue
                         }
-                    }                        
-                    let _string = ''
+                    }
+
+                    let string = ''
 
                     Object.values(result.info).forEach( (count) => {
-                        _string += '_ '.repeat(count)
-                        _string += ' '
+                        let tmp = '_ '.repeat(count)
+                        tmp += ' '
+                        string += tmp
                     })
+                    
 
                     if (typeof window != 'undefined') {
                         if (localStorage.getItem('GuessMTG@date') != result.date) {
@@ -43,7 +46,7 @@ const Panel = () => {
                     }
                     localStorage.setItem('GuessMTG@date', result.date)
                     localStorage.setItem('GuessMTG@challengeId', result._id)
-                    const placeholder = _string.slice(0,_string.length-2).split(' ')
+                    const placeholder = string.slice(0,string.length-2).split(' ')
 
                     updateOrder(result.order)
                     updatePlaceholder(placeholder)

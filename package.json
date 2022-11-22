@@ -20,8 +20,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start -p $PORT",
-    "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -42,6 +42,7 @@
     ]
   },
   "devDependencies": {
+    "eslint": "^8.28.0",
     "gh-pages": "^4.0.0"
   }
 }
