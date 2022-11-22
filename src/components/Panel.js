@@ -56,7 +56,7 @@ const Panel = () => {
 
     return (
         <div className="panel">
-            <h5 className='text-light'> Challenge {challengeOrder} of 3</h5>
+            <h5 className='text-light'> Card {challengeOrder} of 3</h5>
             {/* <GuessContext.Consumer>
                 { ({ guesses }) => ( */}
                    { guesses.map( ({ guess, stats }, i) => {
