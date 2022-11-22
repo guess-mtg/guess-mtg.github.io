@@ -29,14 +29,13 @@ const Panel = () => {
                             continue
                         }
                     }                        
-                    let str = ''
-                    console.log(result.info)
+                    let _string = ''
+
                     for (const count in result.info) {
-                        console.log(count)
-                        str += '_ '.repeat(result.info[count])
-                        str += ' '
-                        console.log(str)
+                        _string += '_ '.repeat(result.info[count])
+                        _string += ' '
                     }    
+
                     if (typeof window != 'undefined') {
                         if (localStorage.getItem('GuessMTG@date') != result.date) {
                             localStorage.removeItem('GuessMTG@guesses')
@@ -44,11 +43,10 @@ const Panel = () => {
                     }
                     localStorage.setItem('GuessMTG@date', result.date)
                     localStorage.setItem('GuessMTG@challengeId', result._id)
-                    const placeholder = str.slice(0,str.length-2).split(' ')
+                    const placeholder = _string.slice(0,_string.length-2).split(' ')
 
-                    console.log(placeholder)
                     updateOrder(result.order)
-                    updatePlaceholder(str.slice(0,str.length-2).split(' '))
+                    updatePlaceholder(placeholder)
                     scrollToBottom()
                     return true
                 }
