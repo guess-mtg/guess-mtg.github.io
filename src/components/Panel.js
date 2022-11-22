@@ -44,6 +44,9 @@ const Panel = () => {
                     }
                     localStorage.setItem('GuessMTG@date', result.date)
                     localStorage.setItem('GuessMTG@challengeId', result._id)
+                    const placeholder = str.slice(0,str.length-2).split(' ')
+
+                    console.log(placeholder)
                     updateOrder(result.order)
                     updatePlaceholder(str.slice(0,str.length-2).split(' '))
                     scrollToBottom()
