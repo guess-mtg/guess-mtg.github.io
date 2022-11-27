@@ -65,11 +65,11 @@ const Panel = () => {
     }
 
     return (
-        <div className="panel">
+        <div className="panel-container">
             <h5 className='text-light'> Card {challenge.order} of 3</h5>
             <p className='text-light'> Hint: {challenge.hint }</p>
-            {/* <GuessContext.Consumer>
-                { ({ guesses }) => ( */}
+            
+            <div className="panel">
                    { guesses.map( ({ guess, stats }, i) => {
                         return <div className="guess-container" key={i}>
                             { guess.split('').map( (char, index) => {
@@ -99,6 +99,7 @@ const Panel = () => {
             }
             </div>
             <div ref={guessesEndRef}/>
+            </div>
             
         </div>
     )
