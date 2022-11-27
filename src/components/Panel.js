@@ -7,7 +7,7 @@ const Panel = () => {
 
     const { placeholder, updatePlaceholder, currentGuess, guesses } = useContext(GuessContext)
 
-    const [ challengeOrder, updateOrder ] = useState(1)
+    const [ challenge, updateChallenge ] = useState({})
 
     const [ finished, toggleFinished ] = useState(false)
 
@@ -20,6 +20,7 @@ const Panel = () => {
             .then( (results) => {
 
                 for (let result of results) {
+
 
                     let guessed = localStorage.getItem('GuessMTG@guessed')
 
@@ -48,7 +49,9 @@ const Panel = () => {
                     localStorage.setItem('GuessMTG@challengeId', result._id)
                     const placeholder = string.slice(0,string.length-2).split(' ')
 
-                    updateOrder(result.order)
+                    console.log('Result', result)
+
+                    updateChallenge(result)
                     updatePlaceholder(placeholder)
                     scrollToBottom()
                     return true
@@ -61,9 +64,12 @@ const Panel = () => {
         guessesEndRef.current?.scrollIntoView({ behavior: "smooth" })
     }
 
+    console.log(challenge)
+
     return (
         <div className="panel">
-            <h5 className='text-light'> Card {challengeOrder} of 3</h5>
+            <h5 className='text-light'> Card {challenge.order} of 3</h5>
+            <p className='text-light'> Hint: {challenge.hint }</p>
             {/* <GuessContext.Consumer>
                 { ({ guesses }) => ( */}
                    { guesses.map( ({ guess, stats }, i) => {
