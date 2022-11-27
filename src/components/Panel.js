@@ -64,8 +64,6 @@ const Panel = () => {
         guessesEndRef.current?.scrollIntoView({ behavior: "smooth" })
     }
 
-    console.log(challenge)
-
     return (
         <div className="panel">
             <h5 className='text-light'> Card {challenge.order} of 3</h5>
