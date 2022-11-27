@@ -51,7 +51,7 @@ const Keyboard = () => {
     const submitGuess = () => {
         const challenge_id = localStorage.getItem('GuessMTG@challengeId') 
 
-        fetch(`https://guess-mtg-svc.herokuapp.com/guess/${challenge_id}`, 
+        fetch(`https://w9byt1.deta.dev/guess/${challenge_id}`, 
             { 
                 method: 'POST', 
                 headers: {

@@ -13,7 +13,7 @@ const Panel = () => {
 
     useEffect( () => {
         scrollToBottom()
-        fetch('https://guess-mtg-svc.herokuapp.com/wordle-challenge')
+        fetch('https://w9byt1.deta.dev/wordle-challenge')
             .then( (response) => {
                 return response.json()
             })
