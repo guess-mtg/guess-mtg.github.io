@@ -64,8 +64,8 @@ const Panel = () => {
 
     return (
         <div className="panel-container">
-            <h5 className='text-light'> Card {challenge.order} of 3</h5>
-            <p className='text-light'> Hint: {challenge.hint }</p>
+            <h5 className='text-light card-indicator'> Card {challenge.order} of 3</h5>
+            <p className='text-light card-hint'> Hint: {challenge.hint }</p>
             
             <div className="panel">
                    { guesses.map( ({ guess, stats }, i) => {

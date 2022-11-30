@@ -51,6 +51,7 @@ html, body{
   flex-direction: column;
   align-items: center;
   padding: 0 20px;
+  margin: 0;
 }
 
 h1 {
@@ -67,6 +68,15 @@ h1 {
   bottom: 0px;
   height: 170px;
   width: 100%;
+  margin: 0;
+}
+
+.card-hint {
+  padding: 0;
+}
+
+.card-indicator {
+  margin: 0;
 }
 
 .keyboard_key {
@@ -156,6 +166,7 @@ h1 {
 }
 
 @media screen and (min-width: 720px) {
+
   .keyboard {
     height: 200px;
   }
@@ -226,5 +237,8 @@ h1 {
 footer {
   color: #eee;
   font-size: 10px;
-  text-align: center  ;
+  text-align: center;
+  width: 100vw;
+  background-color: #1a1a1a;
+  margin: 0;
 }
