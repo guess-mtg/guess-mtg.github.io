@@ -19,6 +19,7 @@ const Keyboard = () => {
         updateGuesses, 
         guesses, 
         updateCurrentGuess,
+        wrongLetters,
         updateWrongLetters,
         updateResult
     } = useContext(GuessContext)
@@ -69,10 +70,11 @@ const Keyboard = () => {
                 guessed.push(result['_id'])
                 localStorage.setItem('GuessMTG@guessed', JSON.stringify(guessed))
                 localStorage.removeItem('GuessMTG@guesses')
+                updateWrongLetters([])
                 updateGuesses([])
                 toggleModal(true, updateResult(result.card))
             } else {
-                let wl = []
+                let wl = wrongLetters
                 for (const key in result.stats) {
                     if (result.stats[key] < 0) wl.push(result.guess[key])
                 }
@@ -84,15 +86,12 @@ const Keyboard = () => {
         })
     }
 
-    const renderKey = (letter, wrongLetters) => {
-
-        const disabled = wrongLetters.includes(letter)
+    const renderKey = (letter, disabled = false) => {
 
         return (
             <Button 
                 variant='light'
                 className='keyboard_key' 
-                key={letter} 
                 disabled={disabled}
                 onClick={ () => disabled || currentGuess.length == placeholder.lenght ? null : updateCurrentGuess(letter) }
             >
@@ -102,7 +101,7 @@ const Keyboard = () => {
     }
     
     return <GuessContext.Consumer>
-        {({ updateCurrentGuess, wrongLetters, card, guesses }) => {
+        {({ updateCurrentGuess, card, guesses }) => {
                 if (guesses.length == 10) {
                     return (
                         <div className='keyboard d-flex align-items-center justify-content-center'>
@@ -114,18 +113,22 @@ const Keyboard = () => {
                         <div className='keyboard'>
                             <div className="d-flex justify-content-center">
                             {
-                                letters_1.map( (letter, index) => {
+                                letters_1.map( (letter) => {
                                     return (
-                                        renderKey(letter, wrongLetters)
+                                        <div key={letter}>
+                                            { renderKey(letter, wrongLetters.includes(letter)) }
+                                        </div>
                                     )
                                 })
                             }
                             </div>
                             <div className="d-flex justify-content-center">
                             {
-                                letters_2.map( (letter, index) => {
+                                letters_2.map( (letter) => {
                                     return (
-                                        renderKey(letter, wrongLetters)
+                                        <div key={letter}>
+                                            { renderKey(letter, wrongLetters.includes(letter)) }
+                                        </div>
                                     )
                                 })
                             }
@@ -139,9 +142,11 @@ const Keyboard = () => {
                                     <IoBackspaceOutline size={30}/>
                                 </Button>
                                 {
-                                    letters_3.map( (letter, index) => {
+                                    letters_3.map( (letter) => {
                                         return (
-                                            renderKey(letter, wrongLetters)
+                                            <div key={letter}>
+                                                { renderKey(letter, wrongLetters.includes(letter)) }
+                                            </div>
                                         )
                                     })
                                 }                       

@@ -29,10 +29,6 @@ function App() {
     toggleInfo(true)
   }, [ ])
 
-  const addWrongLetter = (letters) => {
-    updateWrongLetters(wrongLetters.concat(letters))
-  }
-
   const handleGuessUpdate = (letter, clear = false) => {
 
     let newGuess = currentGuess
@@ -72,7 +68,7 @@ function App() {
         guesses: guesses,
         updateGuesses: updateGuesses,
         wrongLetters: wrongLetters,
-        updateWrongLetters: addWrongLetter,
+        updateWrongLetters: updateWrongLetters,
         card: card,
         updateResult: updateResult
       }}

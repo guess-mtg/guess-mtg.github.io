@@ -49,8 +49,6 @@ const Panel = () => {
                     localStorage.setItem('GuessMTG@challengeId', result._id)
                     const placeholder = string.slice(0,string.length-2).split(' ')
 
-                    console.log('Result', result)
-
                     updateChallenge(result)
                     updatePlaceholder(placeholder)
                     scrollToBottom()
