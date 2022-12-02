@@ -167,6 +167,10 @@ function App() {
           <p>
             Want more games and challenges? <br/> Follow @<a className="menu-link" href="https://instagram.com/guessmtg" target="_blank" rel='noopener'>GuessMTG</a>    on Instagram.
           </p>
+
+        <a title="GDPR-compliant Web Analytics" href="https://clicky.com/101389362"><img alt="Clicky" src="//static.getclicky.com/media/links/badge.gif" border="0" /></a>
+        <script async src="//static.getclicky.com/101389362.js"></script>
+        <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101389362ns.gif" /></p></noscript>
         </menu>
 
       </article>
