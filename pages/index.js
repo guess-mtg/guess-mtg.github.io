@@ -87,8 +87,10 @@ function App() {
           <Button onClick={ () => toggleInfo(!isInfoOpen) } variant='link'>
             <IoInformationCircleOutline color="#eee" size={40} />
           </Button>
+          <div className="d-flex">
           <Image src='/assets/logo.jpg' alt='GuessMTG logo' height={80} width={100}/> 
-
+          <span className='pt-3 small text-light'>beta</span>
+          </div>
           <Button onClick={ () => toggleMenu(!isMenuOpen)} variant="link">
             { isMenuOpen ? 
               <IoCloseOutline color="#eee" size={40} /> :
