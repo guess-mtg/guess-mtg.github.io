@@ -11,6 +11,8 @@ const letters_3 = 'ZXCVBNM'.split('')
 
 const all_letter = letters_1.concat(letters_2).concat(letters_3)
 
+const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8000/"
+
 const Keyboard = () => {
 
     const { 
@@ -52,7 +54,7 @@ const Keyboard = () => {
     const submitGuess = () => {
         const challenge_id = localStorage.getItem('GuessMTG@challengeId') 
 
-        fetch(`https://w9byt1.deta.dev/guess/${challenge_id}`, 
+        fetch(`${apiUrl}/guess/${challenge_id}`, 
             { 
                 method: 'POST', 
                 headers: {

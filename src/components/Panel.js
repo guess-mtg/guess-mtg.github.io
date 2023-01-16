@@ -1,6 +1,8 @@
 import { useContext, useEffect, useRef, useState } from "react"
 import GuessContext from '../context'
 
+const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8000/"
+
 const Panel = () => {
 
     const guessesEndRef = useRef(null)
@@ -13,7 +15,7 @@ const Panel = () => {
 
     useEffect( () => {
         scrollToBottom()
-        fetch('https://w9byt1.deta.dev/wordle-challenge')
+        fetch(`${apiUrl}/wordle-challenge`)
             .then( (response) => {
                 return response.json()
             })
