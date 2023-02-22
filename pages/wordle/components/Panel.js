@@ -1,62 +1,29 @@
 import { useContext, useEffect, useRef, useState } from "react"
 import GuessContext from '../context'
-
-const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8000/"
+import { getChallenge } from "../../../src/services/api"
 
 const Panel = () => {
 
     const guessesEndRef = useRef(null)
 
-    const { placeholder, updatePlaceholder, currentGuess, guesses } = useContext(GuessContext)
+    const { 
+        placeholder, 
+        updatePlaceholder, 
+        currentGuess, 
+        guesses 
+    } = useContext(GuessContext)
 
     const [ challenge, updateChallenge ] = useState({})
-
     const [ finished, toggleFinished ] = useState(false)
 
     useEffect( () => {
         scrollToBottom()
-        fetch(`${apiUrl}/wordle-challenge`)
-            .then( (response) => {
-                return response.json()
-            })
-            .then( (results) => {
-
-                for (let result of results) {
-
-
-                    let guessed = localStorage.getItem('GuessMTG@guessed')
-
-                    if (guessed) {
-                        guessed = JSON.parse(guessed)
-                        if (guessed.indexOf(result['_id']) != -1) {
-                            continue
-                        }
-                    }
-
-                    let string = ''
-
-                    Object.values(result.info).forEach( (count) => {
-                        let tmp = '_ '.repeat(count)
-                        tmp += ' '
-                        string += tmp
-                    })
-                    
-
-                    if (typeof window != 'undefined') {
-                        if (localStorage.getItem('GuessMTG@date') != result.date) {
-                            localStorage.removeItem('GuessMTG@guesses')
-                        }
-                    }
-                    localStorage.setItem('GuessMTG@date', result.date)
-                    localStorage.setItem('GuessMTG@challengeId', result._id)
-                    const placeholder = string.slice(0,string.length-2).split(' ')
-
-                    updateChallenge(result)
-                    updatePlaceholder(placeholder)
-                    scrollToBottom()
-                    return true
-                }
-                toggleFinished(true)
+        getChallenge()
+            .then( ([ result, placeholder ]) => {
+                updateChallenge(result)
+                updatePlaceholder(placeholder)
+                scrollToBottom()
+                if (!placeholder) toggleFinished(true)
             })
     }, [ guesses ] )
 
@@ -64,13 +31,16 @@ const Panel = () => {
         guessesEndRef.current?.scrollIntoView({ behavior: "smooth" })
     }
 
+    console.log(guesses)
+
     return (
         <div className="panel-container">
             <h5 className='text-light card-indicator'> Card {challenge.order} of 3</h5>
             <p className='text-light card-hint'> Hint: {challenge.hint }</p>
             
             <div className="panel">
-                   { guesses.map( ({ guess, stats }, i) => {
+                { 
+                    guesses.map( ({ guess, stats }, i) => {
                         return <div className="guess-container" key={i}>
                             { guess.split('').map( (char, index) => {
                                 if (char === ' ') return <div className='blank-space' key={index}/>
@@ -80,9 +50,8 @@ const Panel = () => {
                                 </div>
                             })}
                         </div>
-                    })}
-                {/* )}
-            </GuessContext.Consumer> */}
+                    })
+                }
 
             <div className="guess-container">
             { !finished && placeholder.map( (space, index) => {
@@ -99,8 +68,7 @@ const Panel = () => {
             }
             </div>
             <div ref={guessesEndRef}/>
-            </div>
-            
+            </div>            
         </div>
     )
 

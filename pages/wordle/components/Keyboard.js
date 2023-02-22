@@ -4,6 +4,7 @@ import { IoBackspaceOutline, IoSend } from 'react-icons/io5'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Image from 'react-bootstrap/Image'
+import { postGuess } from '../../../src/services/api';
 
 const letters_1 = 'QWERTYUIOP'.split('')
 const letters_2 = 'ASDFGHJKL'.split('')
@@ -52,40 +53,19 @@ const Keyboard = () => {
     }, [ currentGuess ] )
 
     const submitGuess = () => {
-        const challenge_id = localStorage.getItem('GuessMTG@challengeId') 
-
-        fetch(`${apiUrl}/guess/${challenge_id}`, 
-            { 
-                method: 'POST', 
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ 'string': currentGuess.join('')})
-            }
-        )
-        .then( (response) => {
-            return response.json()
-        })
-        .then( (result) => {
-            if (result.success) {
-                const guessed = localStorage.getItem('GuessMTG@guessed') ? JSON.parse(localStorage.getItem('GuessMTG@guessed')) : []
-                guessed.push(result['_id'])
-                localStorage.setItem('GuessMTG@guessed', JSON.stringify(guessed))
-                localStorage.removeItem('GuessMTG@guesses')
-                updateWrongLetters([])
-                updateGuesses([])
-                toggleModal(true, updateResult(result.card))
-            } else {
-                let wl = wrongLetters
-                for (const key in result.stats) {
-                    if (result.stats[key] < 0) wl.push(result.guess[key])
+        postGuess(currentGuess)
+            .then( (result) => {
+                if (result.success) {
+                    toggleModal(true)
+                    updateResult(result.card)
+                    updateWrongLetters([])
+                    updateGuesses([])
+                } else {
+                    updateWrongLetters(wrongLetters.concat(result.wrongLetters))
+                    updateGuesses(result.guesses)
                 }
-                updateWrongLetters(wl)
-                updateGuesses(guesses.concat(result))
-                localStorage.setItem('GuessMTG@guesses', JSON.stringify(guesses.concat(result)))
-            }
-            updateCurrentGuess([], true)
-        })
+                updateCurrentGuess([], true)
+            })
     }
 
     const renderKey = (letter, disabled = false) => {
@@ -101,6 +81,7 @@ const Keyboard = () => {
             </Button>
         )
     }
+
     
     return <GuessContext.Consumer>
         {({ updateCurrentGuess, card, guesses }) => {
