@@ -3,8 +3,8 @@ import GuessContext from '../context'
 import { IoBackspaceOutline, IoSend } from 'react-icons/io5'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import Image from 'react-bootstrap/Image'
-import { postGuess } from '../../../src/services/api';
+import Image from 'next/image'
+import { postGuess } from '../../../services/api';
 
 const letters_1 = 'QWERTYUIOP'.split('')
 const letters_2 = 'ASDFGHJKL'.split('')
@@ -12,7 +12,7 @@ const letters_3 = 'ZXCVBNM'.split('')
 
 const all_letter = letters_1.concat(letters_2).concat(letters_3)
 
-const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8000/"
+const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:8000"
 
 const Keyboard = () => {
 
@@ -43,12 +43,10 @@ const Keyboard = () => {
             }
         }
 
-        if (typeof window != 'undefined') {
             window.addEventListener('keydown', handleKeyPress)
             if (localStorage.getItem('GuessMTG@guesses')) {
                 updateGuesses(JSON.parse(localStorage.getItem('GuessMTG@guesses')))
             }
-        }
         return () => window.removeEventListener('keydown', handleKeyPress)
     }, [ currentGuess ] )
 

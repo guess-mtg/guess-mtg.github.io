@@ -5,7 +5,7 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import Alert from 'react-bootstrap/Alert';
 import { Container, Col, Row } from 'react-bootstrap'
-import { authenticate, createUser } from '../../../src/services/api';
+import { authenticate, createUser } from '../../../services/api';
 
 
 function LoginForm() {
@@ -167,19 +167,23 @@ function SignUpForm() {
  
   return (
     <Container fluid className='signup-form-container'>
-        <Tabs
-        defaultActiveKey="login"
-        id="uncontrolled-tab-example"
-        className="signup-tabs"
-        fill
-        >
-        <Tab eventKey="login" title="Login" tabClassName='text-warning' className="signup-tab-pane">
-            <LoginForm />
-        </Tab>
-        <Tab eventKey="register" title="Register" tabClassName='text-warning' className="signup-tab-pane">
-            <RegisterForm />
-        </Tab>
-        </Tabs>
+        <Row>
+            <Col>
+                <Tabs
+                defaultActiveKey="login"
+                id="uncontrolled-tab-example"
+                className="signup-tabs"
+                fill
+                >
+                <Tab eventKey="login" title="Login" tabClassName='text-warning' className="signup-tab-pane">
+                    <LoginForm />
+                </Tab>
+                <Tab eventKey="register" title="Register" tabClassName='text-warning' className="signup-tab-pane">
+                    <RegisterForm />
+                </Tab>
+                </Tabs>
+            </Col>
+        </Row>
     </Container>
   );
 }

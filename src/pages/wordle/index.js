@@ -41,25 +41,27 @@ function Wordle() {
   }
 
   return (
-    <GuessContext.Provider 
-      value={{ 
-        placeholder: placeholder, 
-        updatePlaceholder: updatePlaceholder,
-        currentGuess: currentGuess, 
-        updateCurrentGuess: handleGuessUpdate,
-        guesses: guesses,
-        updateGuesses: updateGuesses,
-        wrongLetters: wrongLetters,
-        updateWrongLetters: updateWrongLetters,
-        card: card,
-        updateResult: updateResult
-      }}
-    >
-      <article>        
-        <Panel />
-        <Keyboard />  
-      </article>
-    </GuessContext.Provider>
+    <div>
+      <GuessContext.Provider 
+        value={{ 
+          placeholder: placeholder, 
+          updatePlaceholder: updatePlaceholder,
+          currentGuess: currentGuess, 
+          updateCurrentGuess: handleGuessUpdate,
+          guesses: guesses,
+          updateGuesses: updateGuesses,
+          wrongLetters: wrongLetters,
+          updateWrongLetters: updateWrongLetters,
+          card: card,
+          updateResult: updateResult
+        }}
+      >
+        <article>        
+          <Panel />
+          <Keyboard />  
+        </article>
+      </GuessContext.Provider>
+    </div>
   );
 }
 

@@ -17,27 +17,25 @@ const Header = ({ toggleInfo, toggleMenu, isMenuOpen, isInfoOpen, componentName 
             <Col>
                 <div className="header w-100 d-flex justify-content-between align-items-center border-bottom mb-3">
                     <div className="d-flex">
-                        <Image src='/assets/logo.jpg' alt='GuessMTG logo' height={80} width={100}/> 
+                        <img src='/assets/logo.jpg' alt='GuessMTG logo' height={80} width={100} /> 
                         <span className='pt-3 small text-light'>beta</span>
                     </div>
-                    { 
-                        componentName !== "SignUp" &&
-                        <div>
-                            <Button onClick={ () => toggleInfo(!isInfoOpen) } variant='link'>
-                                <IoInformationCircleOutline color="#eee" size={40} />
-                            </Button>
-                            <Button onClick={ () => toggleMenu(!isMenuOpen)} variant="link">
-                                { isMenuOpen ? 
-                                <IoCloseOutline color="#eee" size={40} /> :
-                                <IoAdd color="#eee" size={40} /> 
-                                }
-                            </Button>
-                            <Button onClick={handleLogout} variant="link">
-                                <IoLogOut color="#eee" size={40} />
-                            </Button>
-                        </div>
+                    { componentName !== "SignUp" && 
+                      <div>                      
+                          <Button onClick={ () => toggleInfo(!isInfoOpen) } variant='link'>
+                              <IoInformationCircleOutline color="#eee" size={40} />
+                          </Button>
+                          <Button onClick={ () => toggleMenu(!isMenuOpen)} variant="link">
+                              { isMenuOpen ? 
+                              <IoCloseOutline color="#eee" size={40} /> :
+                              <IoAdd color="#eee" size={40} /> 
+                              }
+                          </Button>
+                          <Button onClick={handleLogout} variant="link">
+                              <IoLogOut color="#eee" size={40} />
+                          </Button>
+                      </div>
                     }
-                    
                 </div>
             </Col>
         </Row>
@@ -133,7 +131,7 @@ const Menu = ({ isMenuOpen }) => {
 
         <a title="GDPR-compliant Web Analytics" href="https://clicky.com/101389362"><img alt="Clicky" src="//static.getclicky.com/media/links/badge.gif" border="0" /></a>
         <script async src="//static.getclicky.com/101389362.js"></script>
-        <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101389362ns.gif" /></p></noscript>
+        <noscript><div><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101389362ns.gif" /></div></noscript>
         </menu>
 
     )
@@ -146,7 +144,7 @@ export default function Layout({ children, componentName }) {
     return (
         <Container fluid className='App'>
             <Header componentName={componentName} toggleMenu={toggleMenu} toggleInfo={toggleInfo} isMenuOpen={isMenuOpen} />                
-            <main className='main-container'>{children}</main>
+            <main className='main-container'>{ children }</main>
             <Footer />
             <Menu isMenuOpen={isMenuOpen}/>
             <InfoModal isInfoOpen={isInfoOpen} toggleInfo={toggleInfo} />

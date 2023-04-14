@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react"
 import GuessContext from '../context'
-import { getChallenge } from "../../../src/services/api"
+import { getChallenge } from "../../../services/api"
 
 const Panel = () => {
 
@@ -30,8 +30,6 @@ const Panel = () => {
     const scrollToBottom = () => {
         guessesEndRef.current?.scrollIntoView({ behavior: "smooth" })
     }
-
-    console.log(guesses)
 
     return (
         <div className="panel-container">
